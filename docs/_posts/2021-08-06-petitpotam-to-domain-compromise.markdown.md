@@ -7,7 +7,7 @@ tags:
 classes: wide
 typora-copy-images-to: ../images/posts/2020/${filename}/
 ---
-There has been a lot of noise in the InfoSec community about this attacked, which links a coerced NTLM relay attack and a weakness in the default Active Directory Certificate Services configuration discovered by [SpecterOps](https://posts.specterops.io/certified-pre-owned-d95910965cd2) that allows an attacker to compromise a domain. 
+There has been a lot of noise in the InfoSec community about this attack, which links a coerced NTLM relay attack and a weakness in the default Active Directory Certificate Services configuration discovered by [SpecterOps](https://posts.specterops.io/certified-pre-owned-d95910965cd2) that allows an attacker to compromise a domain. 
 
 ## Preparation
 
