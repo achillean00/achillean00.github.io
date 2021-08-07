@@ -1,16 +1,24 @@
 ---
-layout: post
+layout: single
 title: Nibbles Writeup
 date: '2019-12-18 17:10:00'
 tags:
 - hack-the-box
+classes: wide
+sidebar:
+  - title: "Difficulty: Easy"
+    image: /images/posts/2019-12-18-nibbles-writeup/valentine-nibbles.png
+    text: "https://app.hackthebox.eu/machines/127"
+typora-copy-images-to: ../images/posts/2019/${filename}/
 ---
 
 ## Enumeration
 
 The usual Autorecon enumeration turned up ports 80 & 22 open. Taking a look at the webserver running on port 80 revealed a Hello World page but looking at the source showed an interesting comment:
 
-<figure class="kg-card kg-image-card"><img src="/content/images/2019/12/Screenshot-from-2019-12-18-10-53-06.png" class="kg-image"></figure>
+
+
+![Screenshot-from-2019-12-18-10-53-06](C:\Users\ICart\Documents\home-git\achillean00.github.io\docs\images\posts\2019\2019-12-18-nibbles-writeup\Screenshot-from-2019-12-18-10-53-06-16283622337001.png)
 
 Going to /nibbleblog we an see that it's running an instance of the [Nibbleblog](http://www.nibbleblog.com/) software.
 
