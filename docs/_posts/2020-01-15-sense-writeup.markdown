@@ -8,7 +8,7 @@ classes: wide
 sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-01-15-sense-writeup/sense.png
-    text: "https://app.hackthebox.eu/machines/Sense"
+    text: "https://app.hackthebox.eu/machines/111"
 typora-copy-images-to: ../images/posts/2020/${filename}/
 ---
 An interesting box that teaches the value of thorough enumeration.…
