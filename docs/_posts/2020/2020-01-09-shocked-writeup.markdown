@@ -9,7 +9,7 @@ sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-01-09-shocked-writeup/shocked.png
     text: "https://app.hackthebox.eu/machines/retired"
-typora-copy-images-to: ../images/posts/2020/${filename}/
+typora-copy-images-to: ../../images/posts/2020/${filename}/
 ---
 A straightforward box that teaches you about a very common vulnerability from a few years ago.…
 
@@ -24,7 +24,7 @@ Given nothing seemed to be obviously visible I then ran `dirbuster` over the web
 This discovered that a `/cgi-bin` directory was present. I stopped the scan that was running over the whole tree and started a new scan restricted to `/cgi-bin` and looking for a number of common script file extensions:
 
 
-![Screenshot-from-2020-01-09-11-53-04](../images/posts/2020/2020-01-09-shocked-writeup/Screenshot-from-2020-01-09-11-53-04.png)
+![Screenshot-from-2020-01-09-11-53-04](../../images/posts/2020/2020-01-09-shocked-writeup/Screenshot-from-2020-01-09-11-53-04.png)
 
 This quickly discovered `/cgi-bin/user.sh`. Going to the location showed this was a simple script to show the host uptime.
 

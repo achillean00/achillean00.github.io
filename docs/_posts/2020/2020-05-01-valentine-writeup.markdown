@@ -9,7 +9,7 @@ sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-05-01-valentine-writeup/valentine-6614854.png
     text: "https://app.hackthebox.eu/machines/127"
-typora-copy-images-to: ../images/posts/2020/${filename}/
+typora-copy-images-to: ../../images/posts/2020/${filename}/
 ---
 
 

@@ -9,7 +9,7 @@ sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-04-30-safe-writeup/safe_logo.png
     text: "https://app.hackthebox.eu/machines/199"
-typora-copy-images-to: ../images/posts/2020/${filename}/
+typora-copy-images-to: ../../images/posts/2020/${filename}/
 ---
 
 An easy box that I found anything but! I certainly learnt a lot from this one, but it took a long time to complete.…
@@ -51,7 +51,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 Next start gdb with `gdb myapp` and then run the program by using `r`
 
-![Annotation-2019-10-09-115959](../images/posts/2020/2020-04-30-safe-writeup/Annotation-2019-10-09-115959.png)
+![Annotation-2019-10-09-115959](../../images/posts/2020/2020-04-30-safe-writeup/Annotation-2019-10-09-115959.png)
 
 Once it runs we paste in all the 'A's and get a segfault and we can see a bunch of the registers are filled with 'A' so we now know the code is vulnerable to a buffer overflow.
 

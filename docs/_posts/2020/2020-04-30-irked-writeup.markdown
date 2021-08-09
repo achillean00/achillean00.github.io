@@ -9,7 +9,7 @@ sidebar:
   - title: "Difficulty: Easy"
     image: /images/posts/2020/2020-04-30-irked-writeup/irked_logo.png
     text: "https://app.hackthebox.eu/machines/163"
-typora-copy-images-to: ../images/posts/2020/${filename}/
+typora-copy-images-to: ../../images/posts/2020/${filename}/
 ---
 
 A pretty easy box that reinforces the use of basic techniques.…
@@ -50,11 +50,11 @@ I decided to try a lazy approach first and fired up a listener with `nc -lvp 123
 
 A quick look around the filesystem turned up the user `djmardov`. Looking in `/home/djmardov` I had a nose in the `Documents` directory. I couldn't view `user.txt` but the file `.backup` looked interesting.
 
-![Annotation-2020-04-30-150422](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422.png)
+![Annotation-2020-04-30-150422](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422.png)
 
 This seems to be a reference to [Steganograph](https://en.wikipedia.org/wiki/Steganography)y. First I installed `steghide` with `sudo apt install steghide` and then had a look for a picture. From the earlier `nmap` I remembered that a webserver was listening and so that seemed a good place to start.
 
-![Annotation-2020-04-30-150422a](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422a.png)
+![Annotation-2020-04-30-150422a](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422a.png)
 
 
 There was indeed an image on the site, irked.jpg. I grabbed this and then ran
@@ -70,7 +70,7 @@ Good stuff. Taking the lazy option I tried this password over ssh `ssh djmardov@
 
 and I was in. It was then a quick job to get `user.txt`
 
-![Annotation-2020-04-30-150422b](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422b.png)
+![Annotation-2020-04-30-150422b](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422b.png)
 
 ## Escalating privileges
 
@@ -78,17 +78,17 @@ and I was in. It was then a quick job to get `user.txt`
 
 Now that we have an interactive session as a different users it's time to redo enumeration. Looking at processes running and services listening there wasn't really anything sticking out. Given that there wasn't anything obvious it was time to use [LinEnum](https://github.com/rebootuser/LinEnum). I used `scp` to copy this across and then kicked it off
 
-![Annotation-2020-04-30-150422c](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422c.png)
+![Annotation-2020-04-30-150422c](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422c.png)
 
 Looking through the report a _suid_ file with a fairly recent changed date. Given the box was released on 17 Nov 2018 it seemed worth a look
 
-![Annotation-2020-04-30-150422d](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422d.png)
+![Annotation-2020-04-30-150422d](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422d.png)
 
 ### Exploitation
 
 When you run the program it tries to access `/tmp/listusers` which doesn't exist. Copying the file to my local machine and then running it using `ltrace` shows the following:
 
-![Annotation-2020-04-30-150422e](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422e.png)
+![Annotation-2020-04-30-150422e](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422e.png)
 
 The program first calls the `who` command using system. It then sets its userid (uid) to 0, which is root. It then tries to execute the contents of `/tmp/listusers`. This means if we put some shell commands in this files they should be executed as root.
 
@@ -102,5 +102,5 @@ We then run `chmod u+x /tmp/listusers` to make the file executable. The `echo "s
 
 Running `/usr/bin/viewuser` does indeed give us a root shell and we can quickly grab the flag
 
-![Annotation-2020-04-30-150422f](../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422f-6947874.png)
+![Annotation-2020-04-30-150422f](../../images/posts/2020/2020-04-30-irked-writeup/Annotation-2020-04-30-150422f-6947874.png)
 
