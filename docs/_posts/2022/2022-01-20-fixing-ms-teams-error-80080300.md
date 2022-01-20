@@ -22,5 +22,5 @@ After more extensive googling I found a [post](https://techcommunity.microsoft.c
 2. Find the shortcut for teams
 3. Go to the compatibility tab and set the compatibility mode to *Windows 8*
 
-On starting Team from the changed icon it worked fine. I could also then kill of Teams, undo the compatibility hack and restart Teams without issue...
+On starting Team from the changed icon it worked fine. I could also then kill off Teams, undo the compatibility hack and restart Teams without issue...
 
